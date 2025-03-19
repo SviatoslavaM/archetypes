@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Результати</title>
+  </head>
+  <body>
+    <div class="results-container">
+      <h1>Ваші домінуючі архетипи:</h1>
+      <div id="archetypeResults"></div>
+      <a href="index.html" class="return">Пройти тест знову</a>
+    </div>
+    <script>
+      const archetypeResultsDiv = document.getElementById("archetypeResults");
+      const archetypeResults = JSON.parse(
+        localStorage.getItem("archetypeResults")
+      );
+
+      if (archetypeResults) {
+        archetypeResults.forEach((archetype) => {
+          const archetypeDiv = document.createElement("div");
+          archetypeDiv.classList.add("archetype-result");
+
+          const archetypeName = document.createElement("h2");
+          archetypeName.textContent = archetype;
+          archetypeDiv.appendChild(archetypeName);
+
+          const archetypeImage = document.createElement("img");
+          archetypeImage.src = `img/${archetype.toLowerCase()}.jpeg`; 
+          archetypeImage.alt = archetype;
+          archetypeDiv.appendChild(archetypeImage);
+
+          archetypeResultsDiv.appendChild(archetypeDiv);
+        });
+      } else {
+        archetypeResultsDiv.textContent = "Результати не знайдено.";
+      }
+    </script>
+  </body>
+</html>
